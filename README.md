@@ -109,7 +109,8 @@ LLM(GPT-4o-mini) 자연어 리포트
 **결론**: GMM+PCA는 모델의 근본적 판별력(AUC)을 개선하지 못했고, VM 스크리닝의 핵심 지표인 Recall에서는 오히려 통계적으로 더 낮은 성능을 보였습니다. 이는 4-2~4-3에서 발견한 구조적 불안정성이 실제 일반화 성능 저하로 이어진다는 것을 뒷받침합니다. **"더 정교한 증강 기법이 항상 더 나은 결과를 보장하지 않는다"**는 것을 통계적으로 확인하고, 최종적으로 SMOTE 기반 파이프라인을 채택했습니다.
 
 ### 증강 기법별 성능 분포 (5×5 Repeated Nested CV, 25회)
-<img width="4400" height="1476" alt="Augmentation Method Comparision2_C" src="https://github.com/user-attachments/assets/8fc361ee-1670-463c-84c9-32bb70e125a4" />
+![Uploading Augmentation Method Comparision2_REV.png…]()
+
 
 
 
@@ -129,7 +130,8 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 최종 채택 기준인 **Cost Ratio 15:1**(SMOTE 기준)에서 **Recall 71.1%, 검사량감소 58.4%**를 달성했습니다.
 
 ### Cost Ratio별 Trade-off
-<img width="350" height="92" alt="VM Screening Trade-off_C" src="https://github.com/user-attachments/assets/016763a2-143a-4882-9292-6b8ad935363f" />
+<img width="350" height="92" alt="VM Screening Trade-off_REV" src="https://github.com/user-attachments/assets/c267e50e-cf56-450c-95be-7108eb6663d0" />
+
 
 
 
