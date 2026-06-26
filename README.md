@@ -130,7 +130,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 최종 채택 기준인 **Cost Ratio 15:1**(SMOTE 기준)에서 **Recall 71.1%, 검사량감소 58.4%**를 달성했습니다.
 
 ### Cost Ratio별 Trade-off
-<img src="https://github.com/heejaelee712/.../image.png" width="650" height="350">
+<img src="https://github.com/heejaelee712/.../image.png" width="650">
 
 
 
