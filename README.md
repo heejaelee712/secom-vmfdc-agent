@@ -210,6 +210,14 @@ streamlit run app.py
 
 ---
 
+
+Copyright (c) 2026 HEEJAE LEE
+
+All Rights Reserved.
+
+This repository is provided for portfolio purposes only.
+Unauthorized copying, modification, redistribution, or commercial use is prohibited.
+
 ## 기술 스택
 
 `Python` `scikit-learn` `XGBoost` `imbalanced-learn (SMOTE)` `SHAP` `OpenAI API (GPT-4o-mini)` `Streamlit` `pandas` `numpy` `scipy (Wilcoxon test)`
