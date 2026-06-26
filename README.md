@@ -159,7 +159,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 
 위험 웨이퍼가 감지되면 다음과 같은 흐름으로 가이던스가 생성됩니다.
 
-\`\`\`
+----
 [⚠️ 위험 감지] Wafer 2008-07-29 08:23:00 불량 확률: 0.0173 (기준 0.0080, Cost Ratio 15:1) → 정밀 VM 대상 선별
 
 [🤖 Agent 가이던스 리포트]
@@ -174,7 +174,8 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 
 [🔧 Interlock/Recipe 시스템 모킹] action_type=RECIPE_ADJUSTMENT_SUGGESTION, signal=RECIPE_REVIEW_REQUEST
   → 불량 확률 1.7% - 중위험. sensor_15 관련 Recipe 파라미터 점검 권장 (예: 해당 공정 Step의 가스 유량/RF Power ±5% 조정 검토).
-\`\`\`
+
+-----
 
 이 출력에서 확인할 수 있듯, **LLM은 SHAP이 이미 산출한 원인 센서와 룰 기반 로직이 결정한 조치를 자연어로 풀어 설명할 뿐, 위험 여부나 조치 자체를 직접 판단하지 않습니다.**
 
