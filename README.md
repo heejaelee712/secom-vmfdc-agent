@@ -131,7 +131,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 
 
 ### Cost Ratio별 Trade-off
-<img src="https://github.com/user-attachments/assets/bc0a5719-2caf-44a0-9daf-4dccd5bff053" width="650">
+<img width="650" alt="VM Screening Trade-off_REV" src="https://github.com/user-attachments/assets/e9e89899-4530-4eaf-a13e-d47335e84ccb" />
 
 
 
@@ -153,6 +153,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 | 1. VM 스크리닝 | threshold 기준으로 INSPECT/PASS 판정 | 모델 확률 + threshold |
 | 2. XAI 가이던스 | SHAP으로 원인 센서 추출, artifact 센서(`sensor_67` 등) 자동 필터링 | SHAP + 화이트리스트 |
 | 3. Action Control | 위험도에 따라 Interlock/Recipe 점검 등 조치 결정 | 룰 기반 로직 |
+
 
 ### 실행 예시
 
