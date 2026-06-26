@@ -6,7 +6,6 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Model-green)
 ![SHAP](https://img.shields.io/badge/SHAP-XAI-purple)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
 ![OpenAI](https://img.shields.io/badge/GPT--4o--mini-LLM%20Report-lightgrey)
 
 ---
@@ -53,7 +52,7 @@ Cost-sensitive Threshold 최적화
    ↓
 SHAP 기반 원인 진단 + Artifact 필터링
    ↓
-LLM(GPT-4o-mini) 자연어 리포트 + Streamlit 대시보드
+LLM(GPT-4o-mini) 자연어 리포트
 ```
 
 모든 전처리/증강/Feature Selection은 **train fold 내부에서만 fit**하여 data leakage를 방지하는 구조로 설계했습니다.
@@ -110,7 +109,7 @@ LLM(GPT-4o-mini) 자연어 리포트 + Streamlit 대시보드
 **결론**: GMM+PCA는 모델의 근본적 판별력(AUC)을 개선하지 못했고, VM 스크리닝의 핵심 지표인 Recall에서는 오히려 통계적으로 더 낮은 성능을 보였습니다. 이는 4-2~4-3에서 발견한 구조적 불안정성이 실제 일반화 성능 저하로 이어진다는 것을 뒷받침합니다. **"더 정교한 증강 기법이 항상 더 나은 결과를 보장하지 않는다"**는 것을 통계적으로 확인하고, 최종적으로 SMOTE 기반 파이프라인을 채택했습니다.
 
 ### 증강 기법별 성능 분포 (5×5 Repeated Nested CV, 25회)
-<img width="1589" height="495" alt="Augmentation Method Comparision" src="https://github.com/user-attachments/assets/91638b8a-7bea-4a91-8cec-4864ff57a44c" />
+<img width="4400" height="1470" alt="Augmentation Method Comparision2_C" src="https://github.com/user-attachments/assets/5a6780fe-5bf3-4624-b518-7cae478afb04" />
 
 
 GMM+PCA의 Recall 분포가 다른 두 기법보다 낮고 더 넓게 퍼져 있어, 통계 검정 결과(Wilcoxon p<0.05)와 일치하는 시각적 근거를 보여줍니다.
@@ -129,7 +128,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 최종 채택 기준인 **Cost Ratio 15:1**(SMOTE 기준)에서 **Recall 71.1%, 검사량감소 58.4%**를 달성했습니다.
 
 ### Cost Ratio별 Trade-off
-<img width="790" height="489" alt="VM Screening Trade-off" src="https://github.com/user-attachments/assets/c5bdc5ee-6487-4def-8452-9588b6d4b928" />
+<img width="2608" height="1727" alt="VM Screening Trade-off_C" src="https://github.com/user-attachments/assets/271be907-c2df-4a70-8cac-a2a2a7e111b3" />
 
 
 위 그래프에서 보듯, Cost Ratio가 100 이상으로 올라가면 Recall이 0.981에서 정체되어 더 이상 오르지 않습니다. 이는 현재 보유한 센서 정보만으로는 예측이 불가능한 불량 유형이 일부 존재함을 시사합니다.
@@ -149,8 +148,6 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 | 3. Action Control | 위험도에 따라 Interlock/Recipe 점검 등 조치 결정 | 룰 기반 로직 |
 
 GPT-4o-mini는 위 단계에서 산출된 결과(원인 센서, 위험도, 권고조치)를 **현장 엔지니어가 읽기 좋은 자연어 리포트로 변환**하는 역할만 수행합니다. 실제 판정/조치 결정은 SHAP과 룰 기반 로직이 담당하며, LLM에 의사결정을 위임하지 않는 구조로 설계했습니다.
-
-Streamlit으로 Cost Ratio 슬라이더, 웨이퍼별 실시간 모니터링, Feature Importance/Artifact 비교 탭을 포함한 인터랙티브 대시보드를 구현했습니다.
 
 ---
 
@@ -183,11 +180,13 @@ Streamlit으로 Cost Ratio 슬라이더, 웨이퍼별 실시간 모니터링, Fe
 # 패키지 설치
 pip install -r requirements.txt
 
-# Streamlit 대시보드 실행
-streamlit run app.py
+# 전체 파이프라인 실행
+python secom_etch_agent.py
 ```
 
-데이터는 [UCI SECOM Dataset](https://archive.ics.uci.edu/dataset/179/secom)을 다운로드해 `data/uci-secom.csv`에 위치시키거나, 대시보드 사이드바에서 직접 업로드할 수 있습니다. LLM 리포트 기능을 사용하려면 `OPENAI_API_KEY` 환경변수(또는 대시보드 내 입력창)를 설정하세요. (선택 사항이며, 키가 없어도 SHAP 기반 가이던스는 정상 작동합니다.)
+또는 `notebooks/` 폴더의 Jupyter 노트북을 셀 단위로 순서대로 실행하면 전처리부터 통계적 검증, Agent 데모까지 동일한 흐름을 따라갈 수 있습니다.
+
+데이터는 [UCI SECOM Dataset](https://archive.ics.uci.edu/dataset/179/secom)을 다운로드해 `data/uci-secom.csv`에 위치시키거나, `SECOM_DATA_PATH` 환경변수로 경로를 지정할 수 있습니다. LLM 리포트 기능을 사용하려면 `OPENAI_API_KEY` 환경변수를 설정하세요. (선택 사항이며, 키가 없어도 SHAP 기반 가이던스는 정상 작동합니다.)
 
 ---
 
@@ -195,7 +194,6 @@ streamlit run app.py
 
 ```
 .
-├── app.py                       # Streamlit 대시보드
 ├── secom_etch_agent.py          # 전체 분석 파이프라인 (Cell 1~15 통합)
 ├── notebooks/
 │   └── UCI_SECOM_경력_agent반영.ipynb
@@ -210,14 +208,6 @@ streamlit run app.py
 
 ---
 
-
-Copyright (c) 2026 HEEJAE LEE
-
-All Rights Reserved.
-
-This repository is provided for portfolio purposes only.
-Unauthorized copying, modification, redistribution, or commercial use is prohibited.
-
 ## 기술 스택
 
-`Python` `scikit-learn` `XGBoost` `imbalanced-learn (SMOTE)` `SHAP` `OpenAI API (GPT-4o-mini)` `Streamlit` `pandas` `numpy` `scipy (Wilcoxon test)`
+`Python` `scikit-learn` `XGBoost` `imbalanced-learn (SMOTE)` `SHAP` `OpenAI API (GPT-4o-mini)` `pandas` `numpy` `scipy (Wilcoxon test)`
