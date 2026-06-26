@@ -130,7 +130,7 @@ Cost Ratio를 5~500까지 바꿔가며 시뮬레이션한 결과:
 최종 채택 기준인 **Cost Ratio 15:1**(SMOTE 기준)에서 **Recall 71.1%, 검사량감소 58.4%**를 달성했습니다.
 
 ### Cost Ratio별 Trade-off
-<img width="2000" height="1500" alt="VM Screening Trade-off_REV" src="https://github.com/user-attachments/assets/fb2e47fc-1c7a-4a53-9d43-ddcd07bef0f7" />
+<img width="1500" height="1000" alt="VM Screening Trade-off_REV" src="https://github.com/user-attachments/assets/fb2e47fc-1c7a-4a53-9d43-ddcd07bef0f7" />
 
 
 
